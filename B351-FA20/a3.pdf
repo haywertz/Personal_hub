@@ -1,0 +1,105 @@
+Hayden Wertz
+Yijie Wang
+B-351 Intro to AI
+September 20th, 2020
+A3 Comprehension
+1. This Search will be represented in an ordered pair, where jugA represents the water in
+the 5-gallon jug that is greater than or equal to 0 and less than or equal to 5. JugB will
+represent the 3-gallon jug that is greater than or equal to 0 and less than or equal to 3.
+Thus, the starting state of the search begins at (0, 0) when both jugs are completely
+empty.
+The Goal State of this problem is an ordered pair of (4, 3Gal), where the 5-gallon jug has
+exactly 4 gallons of water and the 3-gallon jug can have any amount greater than or equal
+to 0 to less than or equal to 3 gallons of water.
+To solve this problem, we will need the following constraints:
+1. if (jugA < 5) → (5, jugB)
+2. if (jugA > 0) → (0, jugB)
+3. if (jugB < 3) → (jugA, 3)
+4. if (jugB > 0) → (jugA, 0)
+5. if (jugA + jugB >= 5) and (jugB > 0) → (5, jugB – (5 – jugA))
+6. if (jugA + jugB <= 5) and (jugB > 0) → ((jugA + jugB), 0)
+7. if (jugA + jugB >= 3) and (jugA > 0) → (jugA – (3 – jugB), 3)
+8. if (jugA + jugB <= 3) and (jugB > 0) → (0, (jugA + jugB))
+Gallons of Water in 5-Gal Jug Gallons of Water in 3-Gal Jug Constraint Applied (Number)
+0 0 Starting State
+5 0 1
+2 3 6
+2 0 4
+0 2 8
+5 2 1
+4 3 6
+In the table above, we see that the 5-Gallon jug has the desired amount of four gallons of
+water within its jug. The 3-Gallon jug is completely full, but within the correct range of
+allowable amounts of water. Through the following constraints above, we see that Goal
+State has four gallons filled in the 5-Gallon jug as well as 3 gallons full in the 3-Gallon jug.
+The Search Graph illustrates below is using the Breadth-First Search (BFS) to find the Goal
+State:
+2A. In the first graph, the cheapest path from start state to goal state is 15.
+ (Start → C → F → End)
+The start state’s heuristic value is 11, which is less than 13, thus making it admissible.
+I am now going to prove whether the heuristic value is less than or equal to the cheapest
+cost of the path from start to goal state to prove the heuristic is admissible from every
+start state.
+With A as the start state, the cheapest path is: A → E → D → End. The heuristic value, 5,
+is less than the cheapest path to goal state, 9. Thus, the heuristic is admissible.
+With B as the start state, the cheapest path is: B → E → D → End. The heuristic value, 7 is
+more than the cheapest path to goal state, 6. Thus, the heuristic is not admissible.
+With C as the start state, the cheapest path is: C → F → End. The heuristic value, 6, is less
+than the cheapest path to goal state, 8. Thus, the heuristic is admissible.
+With D as the start state, the cheapest path is: D → End. The heuristic value, 2, is less than
+the cheapest path to goal state, 4. Thus, the heuristic is admissible.
+With E as the start state, the cheapest path is: E → D → End. The heuristic value, 3, is less
+than the cheapest path to goal state, 5. Thus, the heuristic is admissible.
+With F as the start state, the cheapest path is: F → End. The heuristic value, 4, is less than
+the cheapest path to goal state, 5. Thus, the heuristic is admissible.
+Therefore, since B is not admissible, the Heuristic in this graph is not admissible as h(n) is
+not always smaller than or equal to the cheapest path from the start state to the goal
+state. 
+2B. In the first graph, the cheapest path from start state to goal state is 14.
+ (Start → A → E → End)
+The start state’s heuristic value is 2, which is less than 14, thus making it admissible.
+I am now going to prove whether the heuristic value is less than or equal to the cheapest
+cost of the path from start to goal state to prove the heuristic is admissible from every
+start state.
+With A as the start state, the cheapest path is: A → E → End. The heuristic value, 6, is less
+than the cheapest path to goal state, 9. Thus, the heuristic is admissible.
+With B as the start state, the cheapest path is: B → E → End. The heuristic value, 4, is less
+than the cheapest path to goal state, 8. Thus, the heuristic is admissible.
+With C as the start state, the cheapest path is: C → F → End. The heuristic value, 6, is less
+than the cheapest path to goal state, 9. Thus, the heuristic is admissible.
+With D as the start state, the cheapest path is: D → End. The heuristic value, 2, is less than
+the cheapest path to goal state, 4. Thus, the heuristic is admissible.
+With E as the start state, the cheapest path is: E → End. The heuristic value, 2, is less than
+the cheapest path to goal state, 6. Thus, the heuristic is admissible.
+With F as the start state, the cheapest path is: F → End. The heuristic value, 3, is equal to
+the cheapest path to goal state, 3. Thus, the heuristic is admissible.
+Therefore, it is clear from the graph that the heuristic value is always smaller than or equal
+to the cheapest path, according to the cost of each node. Thus, the Heuristic in the Graph
+is also admissible. 
+3. Dijkstra’s algorithm is a shortest path algorithm that finds the shortest path from a start
+node to the goal node. Dijkstra’s creates a tree of the shortest path from the start node to
+all other nodes in the graph. Dijkstra’s algorithm and the A* algorithm both share the same
+goal of finding the cheapest path from the start node to the goal node. However, the A*
+algorithm has a distinctive difference than Dijkstra’s, as A* uses a Heuristic function to find
+the estimated total cost of a path from start to goal state by using a given node. The
+difference being that A* is a Heuristic function that adds the most promising node from
+state node to goal node to the cost so far to reach your goal node. Furthermore, the
+Heuristic function will add the cheapest, most promising node at each local step towards
+the goal state to ultimate find the cheapest path from start to goal state. Meanwhile, A* is
+not always guaranteed to give you the best, unlike Dijkstra’s, since A* uses a Heuristic
+Function that estimates the distance from one node to the goal node.
+4A. Depth-First Search:
+Order of Expansion: (Start → A → E → D → End)
+Fringe: {Start}, {A, B, C}, {E, B, C}, {D, B, C, F}
+Cost: 5 + 3 + 4 + 4 = 16
+4B. Breadth-First Search:
+Order of Expansion: (Start → A → B → C → E → F → D → End)
+Fringe: {Start}, {A, B, C}, {B, C}, {C}, {E, F}, {F}, {D}
+Cost: 5 + 11 + 5 + 3 + 6 + 4 + 4 = 38
+4C. Uniform-Cost Search:
+Order of Expansion: (Start → A → E → End)
+Fringe: {Start}, {A, B, C}, {E}
+Cost: 5 + 3 + 6 = 14
+4D. Best-First Search with f(N) = h(N):
+Order of Expansion: (Start → B → E → End)
+Fringe: {Start}, {A, B, C}, {E}, {D
