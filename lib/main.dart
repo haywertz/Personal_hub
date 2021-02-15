@@ -48,7 +48,7 @@ class LoginPageState extends State<LoginPage>
   Widget build(BuildContext context) {
     return new Scaffold(
       //backgroundColor: Color.fromRGBO(7, 7, 12, 0.87),
-      backgroundColor: Color.fromRGBO(37,37,54,0.65),
+      backgroundColor: Color.fromRGBO(37, 37, 54, 0.65),
       body: new Stack(fit: StackFit.expand, children: <Widget>[
         // // // new Image(
         // // //   image: AssetImage(Assets.nostra_o),
